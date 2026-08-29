@@ -130,10 +130,11 @@ Build a supervised classification model that learns hidden patterns from histori
 | **Decision Tree** | **0.91** | **0.79** | **0.95** | **0.87** | `ccp_alpha=0.01, max_depth=5, min_samples_split=2` |
 | Random Forest | 0.91 | 0.83 | 0.89 | 0.86 | `max_depth=9, min_samples_split=2, n_estimators=300` |
 
-**🏆 Best model: Decision Tree (tuned) — F1 Score = 0.87**
+🏆 Best model: Decision Tree (tuned) — F1 Score = 0.87**
 
 Tuning made a substantial difference across the board — every model improved after `GridSearchCV`, and the tuned Decision Tree edged out Random Forest on F1 (0.87 vs 0.86) while achieving the highest recall (0.95) of any model, meaning it misses the fewest genuinely creditworthy applicants — an important property for a bank trying to avoid losing good customers to false rejections.
----
+
+
 ## 📂 Project Structure
 
 ```
