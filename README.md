@@ -4,7 +4,7 @@ An intelligent, Machine Learning–powered loan approval system built for **Secu
 
 ---
 
-## 📌 Problem Statement
+##  Problem Statement
 
 SecureTrust Bank is a mid-sized financial company offering personal and home loans to customers across urban and rural regions of India. Every day, hundreds of customers apply for loans through online and branch channels.
 
@@ -25,7 +25,7 @@ Design and build an **intelligent loan approval system** using Machine Learning 
 
 ---
 
-## 📊 Dataset Description
+##  Dataset Description
 
 Each row in the dataset represents a single **loan applicant**, described by personal, financial, and credit-related attributes.
 
@@ -54,13 +54,13 @@ Each row in the dataset represents a single **loan applicant**, described by per
 
 ---
 
-## 🎯 Project Objective
+##  Project Objective
 
 Build a supervised classification model that learns hidden patterns from historical loan application records and predicts `Loan_Approved` (1/0) for new applicants — supporting SecureTrust Bank's loan officers with a fast, consistent, and data-driven first-pass decision.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Language:** Python
 - **Data Handling:** pandas, numpy
@@ -75,7 +75,7 @@ Build a supervised classification model that learns hidden patterns from histori
 
 ---
 
-## 🔄 Project Workflow
+##  Project Workflow
 
 1. **Data Understanding & Cleaning**
    - Handle missing values
@@ -104,7 +104,35 @@ Build a supervised classification model that learns hidden patterns from histori
 6. **Best Model Selection**
    - Final model chosen and stored for deployment / future predictions
 
+## 📈 Results
 
+### Baseline models (before tuning)
+
+| Model | Accuracy | Precision | Recall | F1 Score |
+|---|---|---|---|---|
+| Logistic Regression | 0.72 | 0.58 | 0.25 | 0.34 |
+| Naive Bayes | 0.74 | 0.57 | 0.54 | 0.55 |
+| KNN | 0.64 | 0.33 | 0.20 | 0.25 |
+| Decision Tree | 0.88 | 0.83 | 0.79 | 0.81 |
+| SVC | 0.70 | 0.00 | 0.00 | 0.00 |
+| Random Forest | 0.90 | 0.83 | 0.87 | 0.85 |
+
+*SVC's 0.00 precision/recall on the baseline run means it predicted every applicant as "Rejected" — a sign the untuned model needed a different kernel and/or feature scaling, both addressed during hyperparameter tuning below.*
+
+### After hyperparameter tuning (GridSearchCV, 5-fold CV, `f1_weighted` scoring)
+
+| Model | Accuracy | Precision | Recall | F1 Score | Best Parameters |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.87 | 0.79 | 0.79 | 0.79 | `C=10, penalty='l2'` |
+| Naive Bayes | 0.86 | 0.79 | 0.75 | 0.77 | `var_smoothing=0.1` |
+| KNN | 0.77 | 0.60 | 0.51 | 0.55 | `n_neighbors=3` |
+| SVM | 0.85 | 0.78 | 0.80 | 0.79 | `kernel='linear'` |
+| **Decision Tree** | **0.91** | **0.79** | **0.95** | **0.87** | `ccp_alpha=0.01, max_depth=5, min_samples_split=2` |
+| Random Forest | 0.91 | 0.83 | 0.89 | 0.86 | `max_depth=9, min_samples_split=2, n_estimators=300` |
+
+**🏆 Best model: Decision Tree (tuned) — F1 Score = 0.87**
+
+Tuning made a substantial difference across the board — every model improved after `GridSearchCV`, and the tuned Decision Tree edged out Random Forest on F1 (0.87 vs 0.86) while achieving the highest recall (0.95) of any model, meaning it misses the fewest genuinely creditworthy applicants — an important property for a bank trying to avoid losing good customers to false rejections.
 ---
 ## 📂 Project Structure
 
