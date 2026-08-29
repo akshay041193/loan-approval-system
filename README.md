@@ -134,6 +134,7 @@ Best model: Decision Tree (tuned) — F1 Score = 0.87
 
 Tuning made a substantial difference across the board — every model improved after `GridSearchCV`, and the tuned Decision Tree edged out Random Forest on F1 (0.87 vs 0.86) while achieving the highest recall (0.95) of any model, meaning it misses the fewest genuinely creditworthy applicants — an important property for a bank trying to avoid losing good customers to false rejections.
 
+<img width="889" height="490" alt="image" src="https://github.com/user-attachments/assets/b14286d5-5c77-4aec-89dd-2c2b364b456c" />
 
 ## 📂 Project Structure
 
